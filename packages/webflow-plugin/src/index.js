@@ -86,10 +86,10 @@ module.exports = function webflowPlugin(){
 			$body.append(`<script>$(document).ready(function() { $(".w-webflow-badge").removeClass("w-webflow-badge").empty(); });</script>`)
 
 			// Remove generator meta tag
-			//$head.find(`meta[name="generator"]`).remove()
+			$head.find(`meta[name="generator"]`).remove()
 
 			// Add CryoLayer generator meta tag
-			$head.append(`<meta name="generator" content="CryoLayer" />`)
+			// $head.append(`<meta name="generator" content="CryoLayer" />`)
 
 			// Make webfonts.js async
 			// let webfontsJs = `{}`
