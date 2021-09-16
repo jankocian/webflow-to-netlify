@@ -82,7 +82,7 @@ module.exports = function webflowPlugin(){
 			$html.removeAttr(`data-wf-domain`)
 
 			// Remove "Made in Webflow badge"
-			$head.append(`<styles>.w-webflow-badge {display: none !important;}</styles>`)
+			$head.append(`<style>.w-webflow-badge {display: none !important;}</style>`)
 			$body.append(`<script>$(document).ready(function() { $(".w-webflow-badge").removeClass("w-webflow-badge").empty(); });</script>`)
 
 			// Remove generator meta tag
