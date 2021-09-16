@@ -45,7 +45,7 @@ module.exports = function webflowPlugin(){
 	let excludeFromSitemap = []
 
 	return function(){
-		
+
 		// Parse CSS for webp images
 		if(useWebp){
 			this.on(`parseCss`, async ({ data }) => {
@@ -80,6 +80,10 @@ module.exports = function webflowPlugin(){
 
 			// Removes the "Powered by Webflow" link for paid accounts
 			$html.removeAttr(`data-wf-domain`)
+
+			// Remove "Made in Webflow badge"
+			$head.append(`<styles>.w-webflow-badge {display: none !important;}</styles>`)
+			$body.append(`<script>$(document).ready(function() { $(".w-webflow-badge").removeClass("w-webflow-badge").empty(); });</script>`)
 
 			// Remove generator meta tag
 			$head.find(`meta[name="generator"]`).remove()
@@ -146,7 +150,7 @@ module.exports = function webflowPlugin(){
 		this.on(`writeFile`, async obj => {
 			const dist = this.dist
 			let { outputPath } = obj
-			
+
 			// Split path into parts
 			const parts = outputPath.replace(dist, ``).split(`/`)
 			const name = parts.pop()
@@ -208,8 +212,8 @@ module.exports = function webflowPlugin(){
 				console.error(err)
 				// process.exit(1)
 			})
-			
-			
+
+
 
 			// Create robots.txt if it doesn't exist
 			const newRobotsTxt = replaceRobotsTxt || !(await exists(join(dist, `robots.txt`)))
