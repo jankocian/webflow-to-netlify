@@ -41,7 +41,8 @@ module.exports = async function parseHtml(data, from){
 			const $el = $($styleEls[i])
 			let style = $el.attr(`style`)
 			if(style){
-				style = style.replace(/"/g, `'`)
+				// do not replace double quotes with single quotes - it destroys inline SVGs
+				// style = style.replace(/"/g, `'`)
 				const newStyle = await this.parseCss(style, from)
 				// console.log(`newStyle`, newStyle)
 				// process.exit(0)
@@ -54,7 +55,8 @@ module.exports = async function parseHtml(data, from){
 			const $el = $($styleTags[i])
 			let style = $el.html()
 			if(style){
-				style = style.replace(/"/g, `'`)
+				// do not replace double quotes with single quotes - it destroys inline SVGs
+				// style = style.replace(/"/g, `'`)
 				const newStyle = await this.parseCss(style, from)
 				// console.log(`newStyle`, newStyle)
 				// process.exit(0)
